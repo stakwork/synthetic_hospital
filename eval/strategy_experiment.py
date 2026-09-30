@@ -34,10 +34,14 @@ ALL_MODELS = [
 ROUND_STRATEGIES = {1: "structured", 2: "cot", 3: "few_shot"}
 DEFAULT_PILOT = 75
 
-# Winning strategy per task from E1.2 pilot (3 rounds × 3 models × 75 items)
+# Locked strategy per task, as reported in the paper (Table 3). Chosen from the
+# pilot (structured, cot, few_shot against the zero_shot baseline; 3 models x 75
+# items) and then applied to every model on the full public split.
+# context_summarization refers to the whole-patient variant; the
+# specialty-conditioned variant (--granularity specialty) uses zero_shot.
 LOCKED_STRATEGIES = {
     "patient_diagnosis": "cot",
-    "context_summarization": "few_shot",
+    "context_summarization": "structured",
     "evidence_retrieval": "zero_shot",
     "imaging_indication": "few_shot",
 }
